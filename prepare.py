@@ -15,25 +15,29 @@ def basic_clean(string):
     article = unicodedata.normalize('NFKD', article)\
     .encode('ascii', 'ignore')\
     .decode('utf-8', 'ignore')
-    article = re.sub(r"[^a-z0-9'\s]", '', article)
+    article = re.sub(r'[^\w\s]', '', article)
    
     return article
 
 def tokenize(string):
     tokenizer = nltk.tokenize.ToktokTokenizer()
-    print(tokenizer.tokenize(string, return_str = True))
+    article = tokenizer.tokenize(string, return_str = True)
+    
+    return article
     
 def stem(string):
     ps = nltk.porter.PorterStemmer()
     stems = [ps.stem(word) for word in string.split()]
-    article_stemmed = ' '.join(stems)
-    print(article_stemmed)
+    article = ' '.join(stems)
+    
+    return article
     
 def lemmatize(string):
     wnl = nltk.stem.WordNetLemmatizer()
     lemmas = [wnl.lemmatize(word) for word in string.split()]
-    article_lemmatized = ' '.join(lemmas)
-    print(article_lemmatized)
+    article = ' '.join(lemmas)
+    
+    return article
     
 def remove_stopwords(string, extra_words = [], exclude_words = []):
     stopword_list = stopwords.words('english')
